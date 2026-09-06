@@ -1,9 +1,11 @@
 /* ==========================================================================
-   InfinityN∞tes - Cyberpunk Data Journal Theme
+   InfinityN∞tes - Theme & Layout
    ========================================================================== */
 
+/* ------------------------------------
+   Design Tokens (colors, fonts, sizes)
+   ------------------------------------ */
 :root {
-  /* Color Palette */
   --bg-dark: #07090e;
   --bg-card: rgba(16, 21, 31, 0.75);
   --bg-card-solid: #10151f;
@@ -11,7 +13,6 @@
   --border-color: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(0, 229, 255, 0.4);
 
-  /* Glowing Accent Palette */
   --accent-cyan: #00e5ff;
   --accent-purple: #9d4edd;
   --accent-magenta: #f72585;
@@ -19,16 +20,13 @@
   --accent-amber: #f59e0b;
   --accent-red: #ef4444;
 
-  /* Typography Colors */
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
 
-  /* Fonts */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'Fira Code', monospace;
 
-  /* Layout Standards */
   --sidebar-width: 260px;
   --topbar-height: 64px;
   --radius-sm: 6px;
@@ -37,7 +35,9 @@
   --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset & Base Setup */
+/* ------------------------------------
+   Base reset & page background
+   ------------------------------------ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -51,19 +51,21 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  background-image: 
+  /* subtle glow spots */
+  background-image:
     radial-gradient(circle at 15% 15%, rgba(0, 229, 255, 0.03) 0%, transparent 40%),
     radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.03) 0%, transparent 40%);
   background-attachment: fixed;
 }
 
-/* App Layout Grid */
+/* ------------------------------------
+   Sidebar – fixed left navigation
+   ------------------------------------ */
 .app-layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* Sidebar Styling */
 .sidebar {
   width: var(--sidebar-width);
   background-color: var(--bg-card-solid);
@@ -88,8 +90,6 @@ body {
 
 .brand-logo {
   color: var(--accent-cyan);
-  display: flex;
-  align-items: center;
   filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.5));
 }
 
@@ -101,13 +101,11 @@ body {
 .brand-name {
   font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
   color: #fff;
 }
 
 .infinity-symbol {
   color: var(--accent-cyan);
-  font-weight: 400;
 }
 
 .brand-tagline {
@@ -117,7 +115,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* Nav Menu */
+/* --- nav buttons --- */
 .nav-menu {
   padding: 16px 12px;
   display: flex;
@@ -139,7 +137,6 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
-  text-align: left;
   width: 100%;
 }
 
@@ -185,7 +182,9 @@ body {
   fill: var(--accent-green);
 }
 
-/* Mobile Top Header */
+/* ------------------------------------
+   Mobile top bar (hidden on desktop)
+   ------------------------------------ */
 .mobile-header {
   display: none;
   height: 56px;
@@ -208,7 +207,9 @@ body {
   cursor: pointer;
 }
 
-/* Main Viewport */
+/* ------------------------------------
+   Main content area
+   ------------------------------------ */
 .main-viewport {
   margin-left: var(--sidebar-width);
   flex: 1;
@@ -217,7 +218,7 @@ body {
   min-width: 0;
 }
 
-/* Top Bar Global Controls */
+/* --- top bar (search + quick note) --- */
 .top-bar {
   height: var(--topbar-height);
   border-bottom: 1px solid var(--border-color);
@@ -277,7 +278,9 @@ body {
   cursor: pointer;
 }
 
-/* Content Container & Views */
+/* ------------------------------------
+   Tab views – only active is visible
+   ------------------------------------ */
 .content-container {
   padding: 32px;
   flex: 1;
@@ -285,7 +288,7 @@ body {
 
 .tab-view {
   display: none;
-  animation: fadeIn 0.25s ease-in-out;
+  animation: fadeIn 0.25s ease;
 }
 
 .tab-view.active {
@@ -293,8 +296,15 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .view-header {
@@ -304,7 +314,6 @@ body {
 .view-header h2 {
   font-size: 1.6rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
 }
 
 .subtitle {
@@ -313,7 +322,9 @@ body {
   margin-top: 4px;
 }
 
-/* Buttons System */
+/* ------------------------------------
+   Buttons
+   ------------------------------------ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -326,11 +337,16 @@ body {
   cursor: pointer;
   border: 1px solid transparent;
   transition: var(--transition);
-  text-decoration: none;
 }
 
-.btn-sm { padding: 6px 12px; font-size: 0.8rem; }
-.btn-block { width: 100%; }
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.btn-block {
+  width: 100%;
+}
 
 .btn-accent {
   background: var(--accent-cyan);
@@ -380,13 +396,18 @@ body {
   color: var(--accent-cyan);
   font-size: 0.75rem;
   cursor: pointer;
-  padding: 4px 0;
   text-decoration: underline;
 }
 
-.btn-icon { width: 16px; height: 16px; fill: currentColor; }
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
 
-/* Empty State Card */
+/* ------------------------------------
+   Empty state (shown when no notes)
+   ------------------------------------ */
 .empty-state-card {
   background: var(--bg-card);
   border: 1px dashed var(--border-color);
@@ -414,7 +435,9 @@ body {
   margin-bottom: 24px;
 }
 
-/* Dashboard Grid Layouts */
+/* ------------------------------------
+   Dashboard – metrics grid + charts
+   ------------------------------------ */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -427,8 +450,6 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 18px;
-  display: flex;
-  flex-direction: column;
   backdrop-filter: blur(10px);
 }
 
@@ -443,7 +464,7 @@ body {
   font-size: 1.6rem;
   font-weight: 700;
   color: #fff;
-  margin: 6px 0 2px 0;
+  margin: 6px 0 2px;
   font-family: var(--font-mono);
 }
 
@@ -452,11 +473,12 @@ body {
   color: var(--accent-cyan);
 }
 
-/* Charts Grid */
+/* --- chart cards --- */
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  width: 100%;
 }
 
 .chart-card {
@@ -465,6 +487,9 @@ body {
   border-radius: var(--radius-md);
   padding: 20px;
   backdrop-filter: blur(10px);
+
+  min-width: 0;
+  overflow: hidden;
 }
 
 .chart-card.wide {
@@ -486,10 +511,19 @@ body {
 
 .chart-body {
   position: relative;
-  min-height: 220px;
-  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: 220px;
+  display: block;
   align-items: center;
   justify-content: center;
+}
+
+.chart-body canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
 }
 
 .chart-body.donut-body {
@@ -516,8 +550,12 @@ body {
   border-radius: 2px;
 }
 
-/* Inputs & Form Elements */
-.input-select, .input-text, textarea {
+/* ------------------------------------
+   Form elements
+   ------------------------------------ */
+.input-select,
+.input-text,
+textarea {
   background: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
@@ -538,12 +576,16 @@ body {
   font-size: 0.75rem;
 }
 
-.input-select:focus, .input-text:focus, textarea:focus {
+.input-select:focus,
+.input-text:focus,
+textarea:focus {
   outline: none;
   border-color: var(--accent-cyan);
 }
 
-/* Notes Filter Bar */
+/* ------------------------------------
+   Archive filters bar
+   ------------------------------------ */
 .filters-bar {
   display: flex;
   flex-wrap: wrap;
@@ -564,9 +606,11 @@ body {
   color: var(--text-muted);
 }
 
-.filter-group select { width: auto; }
+.filter-group select {
+  width: auto;
+}
 
-/* Notes Archive Cards Grid */
+/* --- note cards (grid) --- */
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -583,7 +627,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
 }
 
 .note-card:hover {
@@ -592,9 +635,15 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
+.note-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
 .note-card-meta {
   display: flex;
-  align-items: center;
   gap: 8px;
   margin-bottom: 10px;
   font-size: 0.75rem;
@@ -616,7 +665,6 @@ body {
   color: var(--text-main);
   font-weight: 500;
   margin-bottom: 10px;
-  line-height: 1.4;
 }
 
 .note-card-preview {
@@ -631,7 +679,6 @@ body {
 
 .note-card-footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   font-size: 0.75rem;
   color: var(--text-dim);
@@ -640,7 +687,9 @@ body {
   margin-top: auto;
 }
 
-/* Editor Form Layout */
+/* ------------------------------------
+   Note editor – two‑column layout (form + metadata)
+   ------------------------------------ */
 .note-editor-card {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -667,6 +716,7 @@ body {
   color: var(--text-dim);
 }
 
+/* --- AI summary box --- */
 .ai-summary-box {
   background: rgba(157, 78, 221, 0.05);
   border: 1px solid rgba(157, 78, 221, 0.3);
@@ -690,7 +740,11 @@ body {
   color: var(--accent-purple);
 }
 
-.ai-spark-icon { width: 16px; height: 16px; fill: var(--accent-purple); }
+.ai-spark-icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--accent-purple);
+}
 
 .ai-loading {
   display: flex;
@@ -710,8 +764,13 @@ body {
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
+/* --- metadata sidebar --- */
 .editor-sidebar-metadata {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -759,7 +818,9 @@ body {
   margin-top: 10px;
 }
 
-/* Note Detail View */
+/* ------------------------------------
+   Detail view – main + sidebar
+   ------------------------------------ */
 .detail-container {
   display: grid;
   grid-template-columns: 1fr 280px;
@@ -770,6 +831,26 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.detail-title-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+}
+
+.detail-title-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.detail-title-text:empty::before {
+  content: 'Untitled';
+  color: var(--text-dim);
+  font-weight: 400;
 }
 
 .detail-summary-card {
@@ -812,6 +893,7 @@ body {
   white-space: pre-wrap;
 }
 
+/* --- detail sidebar metadata --- */
 .detail-sidebar .meta-panel {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -844,15 +926,22 @@ body {
   margin-top: 2px;
 }
 
-.code-font { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+.code-font {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
 
-/* Timeline View */
+/* ------------------------------------
+   Timeline – vertical stream with connecting line
+   ------------------------------------ */
 .timeline-wrapper {
   position: relative;
   padding-left: 24px;
   margin-top: 10px;
 }
 
+/* vertical line down the left side */
 .timeline-wrapper::before {
   content: '';
   position: absolute;
@@ -875,6 +964,7 @@ body {
   position: relative;
 }
 
+/* dot on the timeline */
 .timeline-date-header::before {
   content: '';
   position: absolute;
@@ -916,7 +1006,9 @@ body {
   color: var(--text-dim);
 }
 
-/* Insights Cards */
+/* ------------------------------------
+   Insights – algorithmically generated cards
+   ------------------------------------ */
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -946,7 +1038,9 @@ body {
   color: var(--text-main);
 }
 
-/* Settings View Layout */
+/* ------------------------------------
+   Settings
+   ------------------------------------ */
 .settings-grid {
   display: flex;
   flex-direction: column;
@@ -983,7 +1077,9 @@ body {
   background: rgba(239, 68, 68, 0.03);
 }
 
-/* Toast Notifications */
+/* ------------------------------------
+   Toast notifications (floating bottom‑right)
+   ------------------------------------ */
 .toast-container {
   position: fixed;
   bottom: 24px;
@@ -1002,22 +1098,39 @@ body {
   padding: 12px 18px;
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.25s ease-out;
 }
 
-.toast.toast-error { border-left-color: var(--accent-red); }
-.toast.toast-success { border-left-color: var(--accent-green); }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.toast-error {
+  border-left-color: var(--accent-red);
 }
 
-/* Confirmation Modal */
+.toast-success {
+  border-left-color: var(--accent-green);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------
+   Confirmation modal overlay
+   ------------------------------------ */
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(4px);
   display: flex;
@@ -1035,25 +1148,85 @@ body {
   max-width: 90%;
 }
 
-.modal-box h3 { margin-bottom: 8px; }
-.modal-box p { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 20px; }
-.modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.modal-box h3 {
+  margin-bottom: 8px;
+}
 
-/* Utilities */
-.hidden { display: none !important; }
-.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.modal-box p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
 
-/* Responsive Adaptations */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ------------------------------------
+   Utilities
+   ------------------------------------ */
+.hidden {
+  display: none !important;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ------------------------------------
+   Responsive – adapts to tablet & mobile
+   ------------------------------------ */
 @media (max-width: 900px) {
-  .sidebar { transform: translateX(-100%); }
-  .sidebar.mobile-open { transform: translateX(0); }
-  .mobile-header { display: flex; }
-  .main-viewport { margin-left: 0; padding-top: 56px; }
-  .top-bar { padding: 0 16px; }
-  .content-container { padding: 16px; }
-  .charts-grid { grid-template-columns: 1fr; }
-  .chart-card.wide { grid-column: span 1; }
-  .note-editor-card { grid-template-columns: 1fr; }
-  .detail-container { grid-template-columns: 1fr; }
-  .global-search-wrapper { width: 100%; }
+
+  /* sidebar slides off-screen, shown by toggle */
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  .main-viewport {
+    margin-left: 0;
+    padding-top: 56px;
+  }
+
+  .top-bar {
+    padding: 0 16px;
+  }
+
+  .content-container {
+    padding: 16px;
+  }
+
+  /* charts stack vertically */
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card.wide {
+    grid-column: span 1;
+  }
+
+  /* editor & detail become single‑column */
+  .note-editor-card {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-container {
+    grid-template-columns: 1fr;
+  }
+
+  .global-search-wrapper {
+    width: 100%;
+  }
 }
