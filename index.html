@@ -108,7 +108,7 @@
                             d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                     </svg>
                     <input type="text" id="globalSearch"
-                        placeholder="Search notes, fields, moods, locations, summaries..." />
+                        placeholder="Search notes, titles, fields, moods, locations..." />
                     <button class="clear-search-btn" id="clearSearchBtn" hidden>&times;</button>
                 </div>
                 <div class="top-actions">
@@ -286,6 +286,13 @@
                         <input type="hidden" id="editingNoteId" value="" />
 
                         <div class="editor-main">
+                            <!-- Title input -->
+                            <div class="form-group">
+                                <label for="noteTitle">Title *</label>
+                                <input type="text" id="noteTitle" class="input-text" 
+                                    placeholder="Enter a descriptive title..." required />
+                            </div>
+
                             <div class="form-group">
                                 <div class="editor-label-bar">
                                     <label for="noteBody">Original Thought Note *</label>
@@ -317,7 +324,7 @@
                                         placeholder="Click 'Generate Summary' or enter custom synthesis summary..."></textarea>
                                     <div id="aiLoadingIndicator" class="ai-loading hidden">
                                         <div class="spinner"></div>
-                                        <span>Processing local LLM/Abstractor engine...</span>
+                                        <span>Processing local LLM...</span>
                                     </div>
                                 </div>
                             </div>
@@ -373,6 +380,11 @@
                     <div class="detail-container">
                         <!-- Main Content Area -->
                         <div class="detail-main">
+                            <!-- Title display -->
+                            <div class="detail-title-card">
+                                <h2 id="detailTitle" class="detail-title-text"></h2>
+                            </div>
+
                             <!-- AI Synthesis Banner Card -->
                             <div class="detail-summary-card">
                                 <div class="card-tag">
@@ -491,23 +503,19 @@
                             <button class="btn btn-outline" id="loadDemoDataBtn">Load Demo Data Dataset</button>
                         </div>
 
-                        <!-- AI API Configuration Architecture -->
+                        <!-- AI Configuration -->
                         <div class="settings-card">
-                            <h3>AI Engine Integration Architecture</h3>
-                            <p class="settings-desc">Currently utilizing the local pattern abstractor fallback engine.
-                                You may configure an external LLM endpoint below.</p>
+                            <h3>AI Engine Configuration</h3>
+                            <p class="settings-desc">Configure the local LLM server endpoint. Leave as-is to use the built-in fallback summarizer.</p>
                             <div class="form-group">
-                                <label for="aiModeSelect">AI Summarizer Engine</label>
-                                <select id="aiModeSelect" class="input-select">
-                                    <option value="local">Local Abstractor Engine (Fallback / Offline)</option>
-                                    <option value="api">Custom AI API / Webhook (Simulated Hook)</option>
-                                </select>
+                                <label for="aiEndpoint">llama.cpp Server URL</label>
+                                <input type="text" id="aiEndpoint" class="input-text" 
+                                    placeholder="http://localhost:8080/completion" />
+                                <small style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">
+                                    Example: http://localhost:8080/completion (llama.cpp default)
+                                </small>
                             </div>
-                            <div class="form-group hidden" id="apiKeyGroup">
-                                <label for="aiApiKey">API Token / Endpoint URL</label>
-                                <input type="password" id="aiApiKey" class="input-text"
-                                    placeholder="Stored locally only..." />
-                            </div>
+                            <button class="btn btn-secondary btn-sm" id="testAiConnection">Test Connection</button>
                         </div>
 
                         <!-- Danger Zone -->
@@ -539,7 +547,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 
 </html>
